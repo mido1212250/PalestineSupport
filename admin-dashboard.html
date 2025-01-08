@@ -29,9 +29,15 @@
             margin-left: 250px;
             padding: 20px;
         }
-        .editor {
+        .editor, .user-form {
             display: none;
             margin-top: 20px;
+        }
+        .user-list {
+            margin-top: 20px;
+        }
+        .active {
+            background-color: #e9ecef;
         }
     </style>
 </head>
@@ -51,9 +57,20 @@
         <section id="users" class="mb-5">
             <h2>Manage Users</h2>
             <p>Here you can add, edit, or remove users.</p>
-            <button class="btn btn-primary" onclick="alert('Add User functionality coming soon!')">Add User</button>
-            <button class="btn btn-secondary" onclick="alert('Edit User functionality coming soon!')">Edit User</button>
-            <button class="btn btn-danger" onclick="alert('Remove User functionality coming soon!')">Remove User</button>
+            <button class="btn btn-primary" onclick="showUserForm('add')">Add User</button>
+            <button class="btn btn-secondary" onclick="showUserForm('edit')">Edit User</button>
+            <button class="btn btn-danger" onclick="removeUser()">Remove User</button>
+
+            <div id="userForm" class="user-form">
+                <h3 id="userFormTitle"></h3>
+                <input type="text" id="userName" class="form-control" placeholder="Enter user name">
+                <button class="btn btn-success mt-2" onclick="submitUserForm()">Submit</button>
+                <button class="btn btn-secondary mt-2" onclick="closeUserForm()">Cancel</button>
+            </div>
+
+            <ul id="userList" class="user-list list-group">
+                <!-- User names will be displayed here -->
+            </ul>
         </section>
 
         <section id="content" class="mb-5">
@@ -92,14 +109,95 @@
     </div>
 
     <script>
+        let selectedUser = null;
+
+        document.addEventListener('DOMContentLoaded', loadUsers);
+
+        function loadUsers() {
+            const userList = document.getElementById('userList');
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.forEach(userName => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.textContent = userName;
+                listItem.onclick = () => selectUser(listItem);
+                userList.appendChild(listItem);
+            });
+        }
+
+        function saveUsers() {
+            const userList = document.getElementById('userList');
+            const users = Array.from(userList.children).map(item => item.textContent);
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        function showUserForm(action) {
+            const userForm = document.getElementById('userForm');
+            const userFormTitle = document.getElementById('userFormTitle');
+            userForm.style.display = 'block';
+            userFormTitle.textContent = `${action.charAt(0).toUpperCase() + action.slice(1)} User`;
+
+            if (action === 'edit' && selectedUser) {
+                document.getElementById('userName').value = selectedUser.textContent;
+            } else {
+                document.getElementById('userName').value = '';
+            }
+        }
+
+        function submitUserForm() {
+            const userName = document.getElementById('userName').value.trim();
+            if (userName) {
+                if (selectedUser) {
+                    selectedUser.textContent = userName;
+                    selectedUser.classList.remove('active');
+                    selectedUser = null;
+                } else {
+                    const userList = document.getElementById('userList');
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.textContent = userName;
+                    listItem.onclick = () => selectUser(listItem);
+                    userList.appendChild(listItem);
+                }
+                saveUsers();
+                closeUserForm();
+            } else {
+                alert('Please enter a user name.');
+            }
+        }
+
+        function selectUser(listItem) {
+            if (selectedUser) {
+                selectedUser.classList.remove('active');
+            }
+            selectedUser = listItem;
+            selectedUser.classList.add('active');
+        }
+
+        function removeUser() {
+            if (selectedUser) {
+                selectedUser.remove();
+                saveUsers();
+                selectedUser = null;
+            } else {
+                alert('Please select a user to remove.');
+            }
+        }
+
+        function closeUserForm() {
+            document.getElementById('userForm').style.display = 'none';
+            document.getElementById('userName').value = '';
+            if (selectedUser) {
+                selectedUser.classList.remove('active');
+            }
+        }
+
         function editPage(page) {
-            // Simulate loading page content
             document.getElementById('editorContent').value = `<!-- Content of ${page} -->\n\n<!-- Add your HTML content here -->`;
             document.getElementById('editor').style.display = 'block';
         }
 
         function saveChanges() {
-            // Simulate saving changes
             alert('Changes saved successfully!');
             closeEditor();
         }
