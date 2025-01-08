@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About Us</title>
+        <link rel="stylesheet" href="stylesheet.css">
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Learn about our mission to support Palestine through humanitarian aid and awareness.">
+        <meta name="keywords" content="Palestine, humanitarian aid, support, Gaza, awareness">
+        <meta name="author" content="Help For Palestine">
+        <!-- End of SEO Meta Tags -->
+        <script>
+            function addDynamicContent() {
+                var dynamicSection = document.getElementById('dynamic-content');
+                var newContent = `
+                    <h3>Recent Achievements</h3>
+                    <ul>
+                        <li>Distributed over 10,000 food packages in Gaza</li>
+                        <li>Provided medical aid to 5,000 families</li>
+                        <li>Organized 20 awareness campaigns globally</li>
+                    </ul>
+                `;
+                dynamicSection.innerHTML = newContent;
+            }
+
+            function addTestimonials() {
+                var testimonialsSection = document.getElementById('testimonials');
+                var testimonialsContent = `
+                    <h3>Testimonials</h3>
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"The support from this organization has been life-changing for my family. We are truly grateful for their help."</p>
+                        <footer class="blockquote-footer">A grateful recipient</footer>
+                    </blockquote>
+                    <blockquote class="blockquote">
+                        <p class="mb-0">"Their dedication to raising awareness and providing aid is inspiring. I am proud to support their mission."</p>
+                        <footer class="blockquote-footer">A dedicated volunteer</footer>
+                    </blockquote>
+                `;
+                testimonialsSection.innerHTML = testimonialsContent;
+            }
+
+            window.onload = function() {
+                addDynamicContent();
+                addTestimonials();
+            };
+        </script>
+    </head>
+    <body>
+        <header class="text-center my-4">
+            <h1>About Us</h1>
+        </header>
+        <div class="container">
+            <h4>This website is made to help Palestine through these tough times that they are going through with everything going on at Gaza.</h4>
+            <p class="lead">Our mission is to help and provide Palestine with the necessary needs and also with the necessary daily supplies.</p>
+            <div class="about-palestine">
+                <h2>Supporting Palestine</h2>
+                <div class="mission-statement">
+                    <p>We are a dedicated group of individuals committed to raising awareness and providing humanitarian support for the people of Palestine during these challenging times. Our mission is to help those affected by the ongoing crisis in Gaza and the occupied territories.</p>
+                </div>
+                
+                <div class="our-goals">
+                    <h3>Our Goals</h3>
+                    <ul>
+                        <li>Provide emergency humanitarian aid including food, water, and medical supplies</li>
+                        <li>Support Palestinian families affected by displacement and conflict</li>
+                        <li>Raise awareness about the humanitarian situation</li>
+                        <li>Connect donors with verified charitable organizations</li>
+                    </ul>
+                </div>
+
+                <div class="how-to-help">
+                    <h3>How You Can Help</h3>
+                    <p>Join us in supporting Palestine through:</p>
+                    <ul>
+                        <li>Making donations to verified humanitarian organizations</li>
+                        <li>Sharing accurate information and raising awareness</li>
+                        <li>Participating in peaceful advocacy efforts</li>
+                        <li>Supporting Palestinian businesses and causes</li>
+                    </ul>
+                </div>
+                <div id="dynamic-content" class="mt-4"></div> <!-- Placeholder for dynamic content -->
+                <div id="testimonials" class="mt-4"></div> <!-- Placeholder for testimonials -->
+            </div>
+        </div>
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
+
+
+

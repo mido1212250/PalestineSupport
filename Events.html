@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function validateForm() {
+            var name = document.forms["participationForm"]["name"].value.trim();
+            var email = document.forms["participationForm"]["email"].value.trim();
+            var message = document.forms["participationForm"]["message"].value.trim();
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            if (name === "") {
+                alert("Name must be filled out");
+                return false;
+            }
+            if (email === "" || !emailPattern.test(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+            if (message === "") {
+                alert("Please enter your message");
+                return false;
+            }
+            return true;
+        }
+
+        // Function to add dynamic content
+        function addDynamicContent() {
+            var eventDetails = document.getElementById('event-details');
+            var newContent = `
+                <h3>Additional Event Information</h3>
+                <p>Registration Deadline: December 15, 2024</p>
+                <p>Contact: events@supportpalestine.org</p>
+                <p>Follow us on social media for updates!</p>
+            `;
+            eventDetails.innerHTML = newContent;
+        }
+
+        // Call the function to add content when the page loads
+        window.onload = addDynamicContent;
+    </script>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Support Palestine</h1>
+        <nav>
+            <ul class="nav justify-content-center">
+                <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="aboutus.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="Events.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <section id="upcoming-events" class="mb-5">
+            <h2 class="text-center">Upcoming Events</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Charity Run for Palestine</h3>
+                    <p class="card-text">Date: By the beginning of the upcoming year (January 1st 2025).</p>
+                    <p class="card-text">Location: Sheikh Zayed, Cairo</p>
+                    <p class="card-text">Join us for a charity run to raise funds and awareness for the people of Palestine. All proceeds will go towards humanitarian aid to help the people of Gaza.</p>
+                    <div id="event-details"></div> <!-- Placeholder for dynamic content -->
+                </div>
+            </div>
+        </section>
+
+        <section id="participation-form">
+            <h2 class="text-center">Participate in the Charity Run</h2>
+            <form name="participationForm" action="Submissionpage.html" method="get" onsubmit="return validateForm()" class="mx-auto" style="max-width: 600px;">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" class="form-control" name="message" rows="4" placeholder="Let us know if you will be participating"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

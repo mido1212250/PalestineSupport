@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Palestine Support</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script>
+        function validateForm() {
+            var name = document.forms["questionForm"]["name"].value;
+            var email = document.forms["questionForm"]["email"].value;
+            var question = document.forms["questionForm"]["question"].value;
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            if (name == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+            if (email == "" || !emailPattern.test(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+            if (question == "") {
+                alert("Please enter your question");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <div class="palestine-flag d-inline-block">
+                <div class="flag-black"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            <h1>Contact Us for Palestine/Somalia Support</h1>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-info mb-4">
+                    <h2>Contact Information</h2>
+                    <ul class="list-unstyled">
+                        <li><strong>Name:</strong> Mohammed Hesham</li>
+                        <li><strong>Phone:</strong> +201007655096</li>
+                        <li><strong>Email:</strong> <a href="mailto:Alibakrybadawi99@gmail.com">Alibakrybadawi99@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="support-channels mb-4">
+                    <h2>Ways to Support</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Support Type</th>
+                                <th>Contact Method</th>
+                                <th>Response Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>General Inquiries</td>
+                                <td>Email</td>
+                                <td>24-48 hours</td>
+                            </tr>
+                            <tr>
+                                <td>Urgent Support</td>
+                                <td>Phone</td>
+                                <td>Immediate</td>
+                            </tr>
+                            <tr>
+                                <td>Donations</td>
+                                <td>Email/Phone</td>
+                                <td>24 hours</td>
+                            </tr>
+                            <tr>
+                                <td>Volunteer Work</td>
+                                <td>Email</td>
+                                <td>2-3 days</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-form">
+            <h2>Have Any Questions?</h2>
+            <form name="questionForm" action="questionrevieved.html" method="get" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="question">Your Question:</label>
+                    <textarea id="question" class="form-control" name="question" rows="4" placeholder="Type your question here"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Question</button>
+            </form>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

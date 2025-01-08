@@ -1,0 +1,152 @@
+:root {
+    --primary-color: #2E8B57;      /* SeaGreen */
+    --secondary-color: #8FBC8F;    /* DarkSeaGreen */
+    --accent-color: #D2B48C;       /* Tan */
+    --text-color: #2F4F4F;         /* DarkSlateGray */
+    --background-color: #F5F5F5;   /* Whitesmoke */
+    --card-background: #000000;    /* Black */
+    --link-color: white;         /* DodgerBlue */
+    --link-hover-color: white;   /* DodgerBlue Darker */
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    background-image: linear-gradient(45deg, var(--background-color) 0%, #FFFFFF 100%);
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: #FFFFFF; /* White */
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 2px 5px #D3D3D3; /* LightGray */
+}
+
+.action-card {
+    background-color: var(--card-background);
+    border-left: 4px solid var(--secondary-color);
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px #D3D3D3; /* LightGray */
+    margin: 1rem 0;
+}
+
+.action-card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+.donate-button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.donate-button:hover {
+    background-color: #DEB887; /* Burlywood */
+    transform: scale(1.02);
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: #FFFFFF; /* White */
+    padding: 1rem 0;
+    margin-top: 2rem;
+    box-shadow: 0 -2px 5px #D3D3D3; /* LightGray */
+}
+
+a {
+    color: var(--link-color); /* Visible link color */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--link-hover-color); /* Darker color on hover */
+}
+
+h1 {
+    text-align: center;
+    color: #000000; /* Black */
+}
+
+.resource-list {
+    list-style-type: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.resource-item {
+    background-color: #FFFFFF; /* White */
+    border: 1px solid #D3D3D3; /* LightGray */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 2px 4px #808080; /* Gray */
+}
+
+.resource-item h3 {
+    margin: 0 0 10px;
+    color: #0000FF; /* Blue */
+}
+
+.resource-item p {
+    margin: 5px 0;
+    color: #696969; /* DimGray */
+}
+
+strong {
+    color: #000000; /* Black */
+}
+
+.question-mark {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: auto;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.somalia-stats {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.stats-table th, .stats-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #D3D3D3; /* LightGray */
+}
+
+.stats-table th {
+    background-color: var(--secondary-color);
+    color: #FFFFFF; /* White */
+}
+
+.stats-table tr:nth-child(even) {
+    background-color: #F2F2F2; /* LightGray */
+}
+    .link-container {
+        text-align: left; /* Aligns links to the left */
+    }

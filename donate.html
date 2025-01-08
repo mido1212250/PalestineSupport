@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Support Palestine</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheet.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Support Palestine through donations. Your contributions make a difference.">
+    <meta name="keywords" content="donate, Palestine, humanitarian aid, support">
+    <meta name="author" content="Your Organization Name">
+    <!-- End of SEO Meta Tags -->
+    <script>
+        function validateDonationForm() {
+            var fullName = document.getElementById('fullName').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var amount = document.getElementById('amount').value.trim();
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            if (fullName === "") {
+                alert("Full Name must be filled out");
+                return false;
+            }
+            if (email === "" || !emailPattern.test(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+            if (amount === "" || isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid donation amount");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Support Palestine</h2>
+                        <form action="https://donate.unrwa.org/zakat/~my-donation" target="_blank" method="get" class="donation-form" onsubmit="return validateDonationForm()">
+                            <div class="form-group">
+                                <label for="fullName">Full Name:</label>
+                                <input type="text" class="form-control" id="fullName" name="fullName">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Donation Amount ($):</label>
+                                <input type="number" class="form-control" id="amount" name="amount" min="1">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Donate Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
