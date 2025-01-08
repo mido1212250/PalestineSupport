@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .editor, .user-form {
+            display: none;
+            margin-top: 20px;
+        }
+        .user-list {
+            margin-top: 20px;
+        }
+        .active {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2 class="text-center">Admin Panel</h2>
+        <a href="#users">Manage Users</a>
+        <a href="#content">Manage Content</a>
+        <a href="#settings">Settings</a>
+        <a href="#pages">Edit Pages</a>
+        <a href="Home.html">Logout</a>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to the Admin Dashboard</h1>
+        
+        <section id="users" class="mb-5">
+            <h2>Manage Users</h2>
+            <p>Here you can add, edit, or remove users.</p>
+            <button class="btn btn-primary" onclick="showUserForm('add')">Add User</button>
+            <button class="btn btn-secondary" onclick="showUserForm('edit')">Edit User</button>
+            <button class="btn btn-danger" onclick="removeUser()">Remove User</button>
+
+            <div id="userForm" class="user-form">
+                <h3 id="userFormTitle"></h3>
+                <input type="text" id="userName" class="form-control" placeholder="Enter user name">
+                <button class="btn btn-success mt-2" onclick="submitUserForm()">Submit</button>
+                <button class="btn btn-secondary mt-2" onclick="closeUserForm()">Cancel</button>
+            </div>
+
+            <ul id="userList" class="user-list list-group">
+                <!-- User names will be displayed here -->
+            </ul>
+        </section>
+
+        <section id="content" class="mb-5">
+            <h2>Manage Content</h2>
+            <p>Here you can add, edit, or remove website content.</p>
+            <button class="btn btn-primary" onclick="alert('Add Content functionality coming soon!')">Add Content</button>
+            <button class="btn btn-secondary" onclick="alert('Edit Content functionality coming soon!')">Edit Content</button>
+            <button class="btn btn-danger" onclick="alert('Remove Content functionality coming soon!')">Remove Content</button>
+        </section>
+
+        <section id="settings" class="mb-5">
+            <h2>Settings</h2>
+            <p>Adjust website settings and configurations.</p>
+            <button class="btn btn-primary" onclick="alert('Change Settings functionality coming soon!')">Change Settings</button>
+        </section>
+
+        <section id="pages">
+            <h2>Edit Pages</h2>
+            <p>Access and edit the website pages directly.</p>
+            <ul>
+                <li><a href="Home.html" target="_blank">Home Page</a> <button class="btn btn-link" onclick="editPage('Home.html')">Edit</button></li>
+                <li><a href="aboutus.html" target="_blank">About Us</a> <button class="btn btn-link" onclick="editPage('aboutus.html')">Edit</button></li>
+                <li><a href="Mission.html" target="_blank">Our Mission</a> <button class="btn btn-link" onclick="editPage('Mission.html')">Edit</button></li>
+                <li><a href="contact.html" target="_blank">Contact Us</a> <button class="btn btn-link" onclick="editPage('contact.html')">Edit</button></li>
+                <li><a href="Events.html" target="_blank">Events</a> <button class="btn btn-link" onclick="editPage('Events.html')">Edit</button></li>
+                <li><a href="Resources.html" target="_blank">Resources</a> <button class="btn btn-link" onclick="editPage('Resources.html')">Edit</button></li>
+            </ul>
+        </section>
+
+        <div id="editor" class="editor">
+            <h3>Edit Page Content</h3>
+            <textarea id="editorContent" class="form-control" rows="10"></textarea>
+            <button class="btn btn-success mt-2" onclick="saveChanges()">Save Changes</button>
+            <button class="btn btn-secondary mt-2" onclick="closeEditor()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedUser = null;
+
+        document.addEventListener('DOMContentLoaded', loadUsers);
+
+        function loadUsers() {
+            const userList = document.getElementById('userList');
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.forEach(userName => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.textContent = userName;
+                listItem.onclick = () => selectUser(listItem);
+                userList.appendChild(listItem);
+            });
+        }
+
+        function saveUsers() {
+            const userList = document.getElementById('userList');
+            const users = Array.from(userList.children).map(item => item.textContent);
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        function showUserForm(action) {
+            const userForm = document.getElementById('userForm');
+            const userFormTitle = document.getElementById('userFormTitle');
+            userForm.style.display = 'block';
+            userFormTitle.textContent = `${action.charAt(0).toUpperCase() + action.slice(1)} User`;
+
+            if (action === 'edit' && selectedUser) {
+                document.getElementById('userName').value = selectedUser.textContent;
+            } else {
+                document.getElementById('userName').value = '';
+            }
+        }
+
+        function submitUserForm() {
+            const userName = document.getElementById('userName').value.trim();
+            if (userName) {
+                if (selectedUser) {
+                    selectedUser.textContent = userName;
+                    selectedUser.classList.remove('active');
+                    selectedUser = null;
+                } else {
+                    const userList = document.getElementById('userList');
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.textContent = userName;
+                    listItem.onclick = () => selectUser(listItem);
+                    userList.appendChild(listItem);
+                }
+                saveUsers();
+                closeUserForm();
+            } else {
+                alert('Please enter a user name.');
+            }
+        }
+
+        function selectUser(listItem) {
+            if (selectedUser) {
+                selectedUser.classList.remove('active');
+            }
+            selectedUser = listItem;
+            selectedUser.classList.add('active');
+        }
+
+        function removeUser() {
+            if (selectedUser) {
+                selectedUser.remove();
+                saveUsers();
+                selectedUser = null;
+            } else {
+                alert('Please select a user to remove.');
+            }
+        }
+
+        function closeUserForm() {
+            document.getElementById('userForm').style.display = 'none';
+            document.getElementById('userName').value = '';
+            if (selectedUser) {
+                selectedUser.classList.remove('active');
+            }
+        }
+
+        function editPage(page) {
+            document.getElementById('editorContent').value = `<!-- Content of ${page} -->\n\n<!-- Add your HTML content here -->`;
+            document.getElementById('editor').style.display = 'block';
+        }
+
+        function saveChanges() {
+            alert('Changes saved successfully!');
+            closeEditor();
+        }
+
+        function closeEditor() {
+            document.getElementById('editor').style.display = 'none';
+        }
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> 
